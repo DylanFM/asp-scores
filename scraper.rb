@@ -1,14 +1,13 @@
 #!/usr/bin/env ruby -wKU
 
 require 'rubygems'
-require 'open-uri'
+require 'net/http'
+require 'uri'
 require 'nokogiri'
 
-require 'pp'
-
 def doc
-  # Nokogiri::HTML open('http://www.beachbyte.com/live09/rcp09/mr1.asp')
-  File.open('sample.html', 'r') { |f| Nokogiri::HTML f.read }
+  Nokogiri::HTML Net::HTTP.get(URI.parse('http://www.beachbyte.com/live09/rcp09/mr1.asp'))
+  # File.open('sample.html', 'r') { |f| Nokogiri::HTML f.read }
 end
 
 # Return the raw heat data from the page, we'll tidy it up later on
@@ -49,7 +48,7 @@ def process_heat_info(data)
 end
 
 begin
-  data = process_heat_info get_heats(doc)
+  p process_heat_info(get_heats(doc))
 rescue Exception => e
   puts e
 end
