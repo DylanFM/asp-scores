@@ -6,6 +6,11 @@ require 'nokogiri'
 
 require 'pp'
 
+def doc
+  # Nokogiri::HTML open('http://www.beachbyte.com/live09/rcp09/mr1.asp')
+  File.open('sample.html', 'r') { |f| Nokogiri::HTML f.read }
+end
+
 # Return the raw heat data from the page, we'll tidy it up later on
 def get_heats(page)
   page.css('body > center > table table').inject(Array.new) do |heats, heat|
@@ -44,9 +49,7 @@ def process_heat_info(data)
 end
 
 begin
-  # page = Nokogiri::HTML open('http://www.beachbyte.com/live09/rcp09/mr1.asp')
-  page = File.open('sample.html', 'r') { |f| Nokogiri::HTML f.read }
-  data = process_heat_info get_heats(page)
+  data = process_heat_info get_heats(doc)
 rescue Exception => e
   puts e
 end
