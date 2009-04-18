@@ -1,7 +1,7 @@
 #ASP world tour comp data
 I'm interested in doing something with all the competition data from the ASP (Association of Surfing Professionals) world tour. Lots of things that can be done. How exciting!
 
-Have a look at this example of [getting some Rip Curl Pro 2009 data](http://github.com/DylanFM/asp-scores/blob/2f32b40f70d90ddbfcdab7de571ffdf090712419/example/get_first_three_rounds_of_bells_comp.rb) and [here's another](http://github.com/DylanFM/asp-scores/blob/2f67fffbe3de5835ac3641536697178e67664787/example/get_wave_scores_for_first_5_heats_of_round_1.rb).
+Have a look at this example of [getting some Rip Curl Pro 2009 data](http://github.com/DylanFM/asp-scores/blob/1892d97bb8644297519d5389c26e12a1ad36de8c/example/get_first_three_rounds_of_bells_comp.rb) and [here's another](http://github.com/DylanFM/asp-scores/blob/1892d97bb8644297519d5389c26e12a1ad36de8c/example/get_wave_scores_for_first_5_heats_of_round_1.rb).
 
 ##Here are some example URLS:
 * [Heats in a round](http://www.beachbyte.com/live09/rcp09/mr1.asp) (_supported_)
