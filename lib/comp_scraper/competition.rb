@@ -6,6 +6,10 @@ module CompScraper
     def initialize(base_url)
       @base_url = base_url
     end
+    
+    def fetch_heat_data_for_round(round_number)
+      {}
+    end
 
   end
 end
