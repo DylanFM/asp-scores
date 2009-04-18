@@ -5,8 +5,6 @@ require 'net/http'
 require 'uri'
 require 'nokogiri'
 
-require 'pp'
-
 def doc
   # Nokogiri::HTML Net::HTTP.get(URI.parse('http://www.beachbyte.com/live09/rcp09/mr1sc01.asp?rLingua='))
   File.open('heat-scores-sample.html', 'r') { |f| Nokogiri::HTML f.read }
@@ -75,13 +73,10 @@ def get_judges_from(table)
   end
 end
 
-
-begin
-  data = {
+# Returns nice data from a heat scores page
+def heat_scores_data
+  {
     :top_two_waves => get_top_two_waves(doc),
     :wave_scores => get_competitor_wave_scores(doc)
-  } 
-  pp data
-rescue Exception => e
-  puts e
+  }
 end

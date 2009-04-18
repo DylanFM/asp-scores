@@ -47,8 +47,8 @@ def process_heat_info(data)
   end
 end
 
-begin
-  p process_heat_info(get_heats(doc))
-rescue Exception => e
-  puts e
+# Return nice data from heats page
+def round_heats_data
+  raw_heats_data = get_heats(doc)
+  process_heat_info(raw_heats_data)
 end
