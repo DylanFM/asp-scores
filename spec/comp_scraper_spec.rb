@@ -3,8 +3,10 @@ require File.join(File.dirname(__FILE__), "spec_helper.rb")
 describe CompScraper do
   describe "competition" do
     
-    before(:each) do
+    before do
       @url = 'http://www.beachbyte.com/live09/rcp09/'
+      FakeWeb.register_uri("#{@url}mr1.asp", :file => File.join(SPEC_DIR, 'supports', 'round-heat.html'))
+      
       @comp = CompScraper::Competition.new(@url)
     end
     
