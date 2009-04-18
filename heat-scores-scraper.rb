@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby # !> method redefined; discarding old tidySetErrorBuffer
+#!/usr/bin/env ruby
 
 require 'rubygems'
 require 'net/http'
