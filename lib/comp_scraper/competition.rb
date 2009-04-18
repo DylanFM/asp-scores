@@ -8,8 +8,8 @@ module CompScraper
     end
     
     def fetch_heat_data_for_round(round_number)
-      CompScraper::Document.fetch("#{base_url}mr#{round_number}.asp")
-      {}
+      document = CompScraper::Document.fetch("#{base_url}mr#{round_number}.asp")
+      CompScraper::RoundHeats.fetch_data(document)
     end
 
   end

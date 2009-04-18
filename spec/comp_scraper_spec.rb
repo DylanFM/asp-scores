@@ -14,8 +14,9 @@ describe CompScraper do
       @comp.base_url.should == @url
     end
     
-    it "should get a round's heats page" do
-      @comp.fetch_heat_data_for_round(1).should be_instance_of(Hash)
+    it "should get a round's heats data" do
+      data = @comp.fetch_heat_data_for_round(1)
+      data.should be_instance_of(Array)
     end
     
   end
