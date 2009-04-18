@@ -4,11 +4,7 @@ require 'comp_scraper'
 require 'pp'
 
 rip_curl_pro = CompScraper::Competition.new('http://www.beachbyte.com/live09/rcp09/')
-round_one = []
-
-(1..5).collect do |n|
-  round_one << rip_curl_pro.fetch_wave_scores_for_heat(1,n)
-end
+round_one = (1..5).collect { |n| rip_curl_pro.fetch_wave_scores_for_heat(1,n) }
 
 pp round_one
 # >> [{:top_two_waves=>
