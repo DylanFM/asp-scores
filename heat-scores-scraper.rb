@@ -1,11 +1,3 @@
-#!/usr/bin/env ruby
-
-require 'rubygems'
-require 'net/http'
-require 'uri'
-require 'nokogiri'
-require 'tidy'
-
 def doc
   Tidy.path =  '/usr/lib/libtidy.dylib'
   doc = Tidy.open do |tidy|

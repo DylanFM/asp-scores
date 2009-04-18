@@ -1,10 +1,3 @@
-#!/usr/bin/env ruby
-
-require 'rubygems'
-require 'net/http'
-require 'uri'
-require 'nokogiri'
-
 def doc
   Nokogiri::HTML Net::HTTP.get(URI.parse('http://www.beachbyte.com/live09/rcp09/mr1.asp'))
 end
