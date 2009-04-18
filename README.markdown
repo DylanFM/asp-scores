@@ -11,3 +11,7 @@ Have a look at this example of [getting some Rip Curl Pro 2009 data](http://gith
 _The ones marked as supported can be parsed with this code._
 
 I'd like to get each of these pages supported and to plonk everything into a database so we can have lotsa fun.
+
+##Requirements
+* Nokogiri
+* Tidy (change the path in lib/comp_scraper.rb to your tidy installation)
