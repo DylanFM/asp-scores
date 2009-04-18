@@ -1,13 +1,17 @@
-#!/usr/bin/env ruby -wKU
+#!/usr/bin/env ruby # !> method redefined; discarding old tidySetErrorBuffer
 
 require 'rubygems'
 require 'net/http'
 require 'uri'
 require 'nokogiri'
+require 'tidy'
 
 def doc
-  # Nokogiri::HTML Net::HTTP.get(URI.parse('http://www.beachbyte.com/live09/rcp09/mr1sc01.asp?rLingua='))
-  File.open('heat-scores-sample.html', 'r') { |f| Nokogiri::HTML f.read }
+  Tidy.path =  '/usr/lib/libtidy.dylib'
+  doc = Tidy.open do |tidy|
+    tidy.clean Net::HTTP.get(URI.parse('http://www.beachbyte.com/live09/rcp09/mr1sc01.asp?rLingua='))
+  end
+  Nokogiri::HTML(doc)
 end
 
 # Return the raw info from the top two waves section at the beginning of the page

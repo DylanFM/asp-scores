@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby -wKU
+#!/usr/bin/env ruby
 
 require 'rubygems'
 require 'net/http'
@@ -6,8 +6,7 @@ require 'uri'
 require 'nokogiri'
 
 def doc
-  # Nokogiri::HTML Net::HTTP.get(URI.parse('http://www.beachbyte.com/live09/rcp09/mr1.asp'))
-  File.open('round-heat-sample.html', 'r') { |f| Nokogiri::HTML f.read }
+  Nokogiri::HTML Net::HTTP.get(URI.parse('http://www.beachbyte.com/live09/rcp09/mr1.asp'))
 end
 
 # Return the raw heat data from the page, we'll tidy it up later on
