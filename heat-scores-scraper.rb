@@ -38,46 +38,39 @@ def get_top_two_waves(page)
 end
 
 # Return raw stripped data from the competitor's wave scores section of the page
-def get_competitor_wave_scores_data(page)
-  hash_template = {
-    :judges => [],
-    :scores => []
-  }
-  page.css('body > center > table > tr > td > center > table table[bordercolor="#D8DADF"]').inject(hash_template) do |data,table|
-    if table['border'].to_i == 1
+def get_competitor_wave_scores(page)
+  data, name = {:scores => []}, ''
+  page.css('body > center > table > tr > td > center > table[bordercolor="#D8DADF"]').each do |table|
+    competitor = name.empty? ? nil : name
+    name = table.css('div[align="center"] > font').inner_text
+    if name.empty? && !competitor.empty?
+      data[:judges] = get_judges_from table unless data.has_key? :judges
+      data[:scores].detect { |c| c[:name] == competitor }[:waves] = table.css('tr').collect do |row|
+        next if row.css('td').size <= 2 || row.children.css('td.BodyC').size > 0
+        cells = row.css('td.BodyL')
+        avg = cells.detect { |c| !c.key?('align') }
+        next if avg.nil?
+        {
+          :avg => avg.text.strip.to_f,
+          :inteference => false,
+          :scores => cells.collect { |cell| next unless cell['align'] == 'left'; cell.content.to_f }.compact!
+        }
+      end.compact
+    else
       data[:scores] << {
-        :name => table.css('div[align="center"] > font').inner_text,
+        :name => name,
         :waves => []
       }
     end
-    data
   end
+  data
 end
 
-# Return competitor's wave scores data in a hash
-def get_competitor_wave_scores(page)
-  get_competitor_wave_scores_data(page)
-  
-  # {
-  #     :judges => [],
-  #     :scores => [
-  #       {
-  #         :name => ,
-  #         :waves => [
-  #           {
-  #             :inteference => ?,
-  #             :average => ,
-  #             :scores => {
-  #               :JUDGE_NAME => ,
-  #               :JUDGE_NAME => ,
-  #               :JUDGE_NAME => ,
-  #               :JUDGE_NAME => ....
-  #             }
-  #           }
-  #         ]
-  #       }
-  #     ]
-  #   }
+# Just extract the judge names from the table
+def get_judges_from(table)
+  table.css('td.BodyC').collect do |judge|
+    judge.text.strip
+  end
 end
 
 
@@ -91,10 +84,7 @@ rescue Exception => e
   puts e
 end
 
-# >> {:wave_scores=>
-# >>   {:judges=>[],
-# >>    :scores=>[{:name=>"D.Weare", :waves=>[]}, {:name=>"N.Curran", :waves=>[]}]},
-# >>  :top_two_waves=>
+# >> {:top_two_waves=>
 # >>   [{:name=>"David Weare",
 # >>     :place=>1,
 # >>     :from=>"ZAF",
@@ -104,4 +94,25 @@ end
 # >>     :place=>2,
 # >>     :from=>"USA",
 # >>     :heat_total=>11.16,
-# >>     :diff=>{:amount=>6.68, :status=>"Needs"}}]}
+# >>     :diff=>{:amount=>6.68, :status=>"Needs"}}],
+# >>  :wave_scores=>
+# >>   {:judges=>["DS", "EB", "YS", "RP", "BL"],
+# >>    :scores=>
+# >>     [{:name=>"D.Weare",
+# >>       :waves=>
+# >>        [{:avg=>2.5, :scores=>[3.5, 2.5, 2.0, 2.5, 2.5], :inteference=>false},
+# >>         {:avg=>5.5, :scores=>[6.0, 5.5, 5.5, 5.0, 5.5], :inteference=>false},
+# >>         {:avg=>0.97, :scores=>[1.2, 1.0, 0.7, 0.5, 1.2], :inteference=>false},
+# >>         {:avg=>3.17, :scores=>[3.0, 3.5, 2.5, 3.5, 3.0], :inteference=>false},
+# >>         {:avg=>7.5, :scores=>[7.5, 7.5, 6.0, 7.5, 7.5], :inteference=>false},
+# >>         {:avg=>0.6, :scores=>[0.5, 0.8, 0.5, 0.3, 0.8], :inteference=>false}]},
+# >>      {:name=>"N.Curran",
+# >>       :waves=>
+# >>        [{:avg=>0.67, :scores=>[1.0, 0.5, 0.5, 0.5, 1.0], :inteference=>false},
+# >>         {:avg=>1.5, :scores=>[1.5, 1.5, 1.5, 1.5, 1.5], :inteference=>false},
+# >>         {:avg=>6.33, :scores=>[7.0, 6.5, 6.5, 6.0, 6.0], :inteference=>false},
+# >>         {:avg=>4.17, :scores=>[5.0, 4.5, 4.0, 4.0, 4.0], :inteference=>false},
+# >>         {:avg=>0.43, :scores=>[0.5, 0.5, 0.3, 0.3, 0.5], :inteference=>false},
+# >>         {:avg=>4.83,
+# >>          :scores=>[5.5, 5.0, 4.5, 4.5, 5.0],
+# >>          :inteference=>false}]}]}}
