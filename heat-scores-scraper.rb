@@ -50,9 +50,11 @@ def get_competitor_wave_scores(page)
         cells = row.css('td.BodyL')
         avg = cells.detect { |c| !c.key?('align') }
         next if avg.nil?
+        match = /^(\(\*\))?(\d+\.\d{2})/.match avg.text.strip
+        next if match.nil?
         {
-          :avg => avg.text.strip.to_f,
-          :inteference => false,
+          :inteference => !match[1].nil?,
+          :avg => match[2].to_f,
           :scores => cells.collect { |cell| next unless cell['align'] == 'left'; cell.content.to_f }.compact!
         }
       end.compact
@@ -83,36 +85,3 @@ begin
 rescue Exception => e
   puts e
 end
-
-# >> {:top_two_waves=>
-# >>   [{:name=>"David Weare",
-# >>     :place=>1,
-# >>     :from=>"ZAF",
-# >>     :heat_total=>13.0,
-# >>     :diff=>{:amount=>1.84, :status=>"Win by"}},
-# >>    {:name=>"Nathaniel Curran",
-# >>     :place=>2,
-# >>     :from=>"USA",
-# >>     :heat_total=>11.16,
-# >>     :diff=>{:amount=>6.68, :status=>"Needs"}}],
-# >>  :wave_scores=>
-# >>   {:judges=>["DS", "EB", "YS", "RP", "BL"],
-# >>    :scores=>
-# >>     [{:name=>"D.Weare",
-# >>       :waves=>
-# >>        [{:avg=>2.5, :scores=>[3.5, 2.5, 2.0, 2.5, 2.5], :inteference=>false},
-# >>         {:avg=>5.5, :scores=>[6.0, 5.5, 5.5, 5.0, 5.5], :inteference=>false},
-# >>         {:avg=>0.97, :scores=>[1.2, 1.0, 0.7, 0.5, 1.2], :inteference=>false},
-# >>         {:avg=>3.17, :scores=>[3.0, 3.5, 2.5, 3.5, 3.0], :inteference=>false},
-# >>         {:avg=>7.5, :scores=>[7.5, 7.5, 6.0, 7.5, 7.5], :inteference=>false},
-# >>         {:avg=>0.6, :scores=>[0.5, 0.8, 0.5, 0.3, 0.8], :inteference=>false}]},
-# >>      {:name=>"N.Curran",
-# >>       :waves=>
-# >>        [{:avg=>0.67, :scores=>[1.0, 0.5, 0.5, 0.5, 1.0], :inteference=>false},
-# >>         {:avg=>1.5, :scores=>[1.5, 1.5, 1.5, 1.5, 1.5], :inteference=>false},
-# >>         {:avg=>6.33, :scores=>[7.0, 6.5, 6.5, 6.0, 6.0], :inteference=>false},
-# >>         {:avg=>4.17, :scores=>[5.0, 4.5, 4.0, 4.0, 4.0], :inteference=>false},
-# >>         {:avg=>0.43, :scores=>[0.5, 0.5, 0.3, 0.3, 0.5], :inteference=>false},
-# >>         {:avg=>4.83,
-# >>          :scores=>[5.5, 5.0, 4.5, 4.5, 5.0],
-# >>          :inteference=>false}]}]}}
