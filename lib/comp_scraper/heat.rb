@@ -7,8 +7,9 @@ module CompScraper
     
     belongs_to :round
     
-    has n, :competitors
     has n, :judges
+    has n, :competitors
+    has n, :surfers, :through => :competitors
     
     def save_wave_scores
       data = fetch_wave_scores
@@ -17,7 +18,7 @@ module CompScraper
       create_judges(data[:wave_scores][:judges])
       data[:wave_scores][:scores].each do |scores|
         surname = scores[:name].split('.').last
-        competitor = competitors.detect { |c| c.name =~ /#{surname}$/i }
+        competitor = competitors.detect { |c| c.surfer.name =~ /#{surname}$/i }
         next unless competitor
         competitor.waves = scores[:waves].collect do |wave|
           w = Wave.create(
@@ -43,7 +44,7 @@ module CompScraper
     
       def save_competitor_diffs(data)
         data[:top_two_waves].each do |competitor|
-          c = self.competitors.first(:name => competitor[:name])
+          c = self.competitors.first('surfer.name' => competitor[:name])
           c.attributes = {
             :diff_status => competitor[:diff][:status],
             :diff_amount => competitor[:diff][:amount]
