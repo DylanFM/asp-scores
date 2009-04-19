@@ -19,19 +19,17 @@ describe CompScraper do
     end
     
     it "should have a base url" do
-      @comp.base_url.should == @url
+      @comp.base_url.should be @url
     end
     
     it "should have a name" do
-      @comp.name.should == @name
+      @comp.name.should be @name
     end
     
     it "should get a round's heats data" do
       round = @comp.rounds.build(:number => 1)
-      round.fetch_heat_data
-      number_of_heats = round.heat_data.size
       round.save_heat_data
-      round.heats.size.should == number_of_heats
+      round.heats.size.should be 9
       @comp.save
     end
     
