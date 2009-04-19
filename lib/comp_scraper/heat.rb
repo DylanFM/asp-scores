@@ -17,11 +17,15 @@ module CompScraper
         surname = scores[:name].split('.').last
         competitor = competitors.detect { |c| c.name =~ /#{surname}$/i }
         next unless competitor
-        scores[:waves].each do |wave|
-          competitor.waves.build(
+        competitor.waves = scores[:waves].collect do |wave|
+          w = Wave.create(
             :average => wave[:avg],
             :inteference => wave[:inteference]
           )
+          wave[:scores].each do |score|
+            w.scores.build(:amount => score)
+          end
+          w
         end
         competitor.save
       end
