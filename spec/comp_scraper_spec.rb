@@ -29,7 +29,9 @@ describe CompScraper do
     it "should get a round's heats data" do
       round = @comp.rounds.build(:number => 1)
       round.fetch_heat_data
-      round.heat_data.should be_instance_of(Array)
+      number_of_heats = round.heat_data.size
+      round.save_heat_data
+      round.heats.size.should == number_of_heats
       @comp.save
     end
     
