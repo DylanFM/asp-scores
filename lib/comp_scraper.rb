@@ -4,9 +4,11 @@ require 'uri'
 require 'nokogiri'
 require 'tidy'
 
+require File.join(File.dirname(__FILE__), "..", "config", "environment.rb")
+
 Dir.glob(File.join(File.dirname(__FILE__), "comp_scraper", "*.rb")).each { |f| require f }
 
-Tidy.path =  '/usr/lib/libtidy.dylib'
+Tidy.path = TIDY_PATH
 
 module CompScraper
   
