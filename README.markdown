@@ -2,7 +2,7 @@
 I'm interested in doing something with all the competition data from the ASP (Association of Surfing Professionals) world tour. Lots of things that can be done. How exciting!
 
 ##Example
-This is pulled from the Rip Curl Pro file in examples/.
+This is pulled from [the Rip Curl Pro file in examples/](http://github.com/DylanFM/asp-scores/blob/e8d41659d8a1846a7c009b8824d5e974ae76c9a4/example/rip_curl_pro.rb).
 
 		# Make a new competition
 		rcp = CompScraper::Competition.create(
