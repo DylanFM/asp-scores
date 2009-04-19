@@ -1,10 +1,12 @@
 module CompScraper
   class Competition
-
-    attr_reader :base_url
+    include DataMapper::Resource
+    
+    property :id,       Integer,  :serial => true
+    property :base_url, String,   :nullable => false
 
     def initialize(base_url)
-      @base_url = base_url
+      self.base_url = base_url
     end
     
     def fetch_heat_data_for_round(round_number)

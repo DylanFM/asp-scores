@@ -7,5 +7,11 @@ Spec::Rake::SpecTask.new(:test) do |t|
   t.spec_opts = ['--options', "spec/spec.opts"]
   t.spec_files = FileList['spec/**/*_spec.rb']
 end
+
+desc "Migrate database"
+task :auto_migrate do
+  require 'lib/comp_scraper'
+  DataMapper.auto_migrate!
+end
  
 task :default => :test
