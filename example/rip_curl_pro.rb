@@ -9,20 +9,11 @@ rcp = CompScraper::Competition.create(
     :name => "Rip Curl Pro Bells Beach 2009"
   )
 
-# All stages of the competition
-[1,2,3,'qf','sf','fi'].collect do |n|
-  type = n.is_a?(String) ? {:name => n} : {:number => n}
-  # Make a new round
-  round = rcp.rounds.build(type)
-  # Get the data for the round
-  round.save_heat_data
-  # Save comp
-  rcp.save
-end
+rcp.save_comp_data
 
 puts rcp.name
 rcp.rounds.all.each do |round|
-  puts "#{round}:"
+  puts "#{round.gender == 'f' ? "Women's" : "Men's"} #{round}:"
   round.heats.all.each do |heat|
     winner = heat.competitors.first(:place => 1)
     loser = heat.competitors.first(:place => 2)
@@ -30,7 +21,7 @@ rcp.rounds.all.each do |round|
   end
 end
 # >> Rip Curl Pro Bells Beach 2009
-# >> Round 1:
+# >> Men's Round 1:
 # >> 	Heat 1 - David Weare beat Nathaniel Curran who needed 6.68 points
 # >> 	Heat 2 - Michel Bourez beat Roy Powers who needed 8.4 points
 # >> 	Heat 3 - Jay Thompson beat Heitor Alves who needed 14.67 points
@@ -40,7 +31,7 @@ end
 # >> 	Heat 7 - Jihad Khodr beat Patrick Gudauskas who needed 6.5 points
 # >> 	Heat 8 - Owen Wright beat Dane Reynolds who needed 6.68 points
 # >> 	Heat 9 - Jordy Smith beat Matt Wilkinson who needed 18.71 points
-# >> Round 2:
+# >> Men's Round 2:
 # >> 	Heat 1 - CJ Hobgood beat Mick Campbell who needed 9.67 points
 # >> 	Heat 2 - Taylor Knox beat Chris Ward who needed 16.94 points
 # >> 	Heat 3 - Kai Otton beat Dayyan Neve who needed 6.18 points
@@ -50,7 +41,7 @@ end
 # >> 	Heat 7 - Jordy Smith beat Damien Hobgood who needed 5.84 points
 # >> 	Heat 8 - Owen Wright beat Kelly Slater who needed 7.67 points
 # >> 	Heat 9 - Adam Robertson beat Bede Durbidge who needed 7.94 points
-# >> Round 3:
+# >> Men's Round 3:
 # >> 	Heat 1 - CJ Hobgood beat Taylor Knox who needed 8.5 points
 # >> 	Heat 2 - Joel Parkinson beat Kai Otton who needed  points
 # >> 	Heat 3 - Mick Fanning beat Bobby Martinez who needed 14.27 points
@@ -59,13 +50,42 @@ end
 # >> 	Heat 6 - Kekoa Bacalso beat Drew Courtney who needed 17.35 points
 # >> 	Heat 7 - Kieren Perrow beat Jay Thompson who needed 7.5 points
 # >> 	Heat 8 - Fredrick Patacchia beat Dean Morrison who needed 17.58 points
-# >> Quarter-final:
+# >> Men's Quarter-final:
 # >> 	Heat 1 - Joel Parkinson beat CJ Hobgood who needed 7.84 points
 # >> 	Heat 2 - Jordy Smith beat Mick Fanning who needed 7.68 points
 # >> 	Heat 3 - Adam Robertson beat Kekoa Bacalso who needed 7.43 points
 # >> 	Heat 4 - Fredrick Patacchia beat Kieren Perrow who needed 7.46 points
-# >> Semi-final:
+# >> Men's Semi-final:
 # >> 	Heat 1 - Joel Parkinson beat Jordy Smith who needed 8.66 points
 # >> 	Heat 2 - Adam Robertson beat Fredrick Patacchia who needed 7.47 points
-# >> Final:
+# >> Men's Final:
 # >> 	Heat 1 - Joel Parkinson beat Adam Robertson who needed 17.41 points
+# >> Women's Round 1:
+# >> 	Heat 1 - Sally Fitzgibbons beat Amee Donohoe who needed 7.9 points
+# >> 	Heat 2 - Layne Beachley beat Rosanne Hodge who needed  points
+# >> 	Heat 3 - Stephanie Gilmore beat Bruna Schmitz who needed 7.44 points
+# >> 	Heat 4 - Chelsea Hedges beat Silvana Lima who needed 7.24 points
+# >> 	Heat 5 - Sofia Mulanovich beat Alana Blanchard who needed 8.16 points
+# >> 	Heat 6 - Samantha Cornish beat Jacqueline Silva who needed 4.94 points
+# >> Women's Round 2:
+# >> 	Heat 1 - Coco Ho beat Nikki Van Dijk who needed 8.34 points
+# >> 	Heat 2 - Rebecca Woods beat Paige Hareb who needed 5.5 points
+# >> Women's Round 3:
+# >> 	Heat 1 - Sally Fitzgibbons beat Layne Beachley who needed 16.51 points
+# >> 	Heat 2 - Jacqueline Silva beat Amee Donohoe who needed 6.33 points
+# >> 	Heat 3 - Paige Hareb beat Coco Ho who needed 8.84 points
+# >> 	Heat 4 - Stephanie Gilmore beat Nikki Van Dijk who needed 17.84 points
+# >> 	Heat 5 - Silvana Lima beat Alana Blanchard who needed 7.0 points
+# >> 	Heat 6 - Rebecca Woods beat Chelsea Hedges who needed 7.34 points
+# >> 	Heat 7 - Samantha Cornish beat Bruna Schmitz who needed 7.83 points
+# >> 	Heat 8 - Sofia Mulanovich beat Rosanne Hodge who needed 5.93 points
+# >> Women's Quarter-final:
+# >> 	Heat 1 - Sally Fitzgibbons beat Jacqueline Silva who needed 7.34 points
+# >> 	Heat 2 - Stephanie Gilmore beat Paige Hareb who needed 3.94 points
+# >> 	Heat 3 - Silvana Lima beat Rebecca Woods who needed 3.0 points
+# >> 	Heat 4 - Sofia Mulanovich beat Samantha Cornish who needed 6.27 points
+# >> Women's Semi-final:
+# >> 	Heat 1 - Stephanie Gilmore beat Sally Fitzgibbons who needed 16.61 points
+# >> 	Heat 2 - Silvana Lima beat Sofia Mulanovich who needed 15.0 points
+# >> Women's Final:
+# >> 	Heat 1 - Silvana Lima beat Stephanie Gilmore who needed 9.51 points
