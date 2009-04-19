@@ -10,7 +10,7 @@ This is pulled from the Rip Curl Pro file in examples/.
 		    :name => "Rip Curl Pro Bells Beach 2009"
 		  )
 
-		# First 3 rounds # !> `&' interpreted as argument prefix
+		# First 3 rounds
 		(1..3).collect do |n|
 		  # Make a new round
 		  round = rcp.rounds.build(:number => n)
