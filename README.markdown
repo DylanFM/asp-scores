@@ -2,7 +2,7 @@
 I'm interested in doing something with all the competition data from the ASP (Association of Surfing Professionals) world tour. Lots of things that can be done. How exciting!
 
 ##Example
-This is pulled from [the Rip Curl Pro file in examples/](http://github.com/DylanFM/asp-scores/blob/e8d41659d8a1846a7c009b8824d5e974ae76c9a4/example/rip_curl_pro.rb).
+This is pulled from [the Rip Curl Pro file in examples/](http://github.com/DylanFM/asp-scores/blob/3b3e31edaca6809b075f3f65bd2e912f07f3f3a3/example/rip_curl_pro.rb).
 
 		# Make a new competition
 		rcp = CompScraper::Competition.create(
@@ -10,10 +10,11 @@ This is pulled from [the Rip Curl Pro file in examples/](http://github.com/Dylan
 		    :name => "Rip Curl Pro Bells Beach 2009"
 		  )
 
-		# First 3 rounds
-		(1..3).collect do |n|
+		# All stages of the competition
+		[1,2,3,'qf','sf','fi'].collect do |n|
+		  type = n.is_a?(String) ? {:name => n} : {:number => n}
 		  # Make a new round
-		  round = rcp.rounds.build(:number => n)
+		  round = rcp.rounds.build(type)
 		  # Get the data for the round
 		  round.save_heat_data
 		  # Save comp
@@ -22,7 +23,7 @@ This is pulled from [the Rip Curl Pro file in examples/](http://github.com/Dylan
 
 		puts rcp.name
 		rcp.rounds.all.each do |round|
-		  puts "Round #{round.number}:"
+		  puts "#{round}:"
 		  round.heats.all.each do |heat|
 		    winner = heat.competitors.first(:place => 1)
 		    loser = heat.competitors.first(:place => 2)
@@ -59,6 +60,16 @@ This is pulled from [the Rip Curl Pro file in examples/](http://github.com/Dylan
 		# >> 	Heat 6 - Kekoa Bacalso beat Drew Courtney who needed 17.35 points
 		# >> 	Heat 7 - Kieren Perrow beat Jay Thompson who needed 7.5 points
 		# >> 	Heat 8 - Fredrick Patacchia beat Dean Morrison who needed 17.58 points
+		# >> Quarter-final:
+		# >> 	Heat 1 - Joel Parkinson beat CJ Hobgood who needed 7.84 points
+		# >> 	Heat 2 - Jordy Smith beat Mick Fanning who needed 7.68 points
+		# >> 	Heat 3 - Adam Robertson beat Kekoa Bacalso who needed 7.43 points
+		# >> 	Heat 4 - Fredrick Patacchia beat Kieren Perrow who needed 7.46 points
+		# >> Semi-final:
+		# >> 	Heat 1 - Joel Parkinson beat Jordy Smith who needed 8.66 points
+		# >> 	Heat 2 - Adam Robertson beat Fredrick Patacchia who needed 7.47 points
+		# >> Final:
+		# >> 	Heat 1 - Joel Parkinson beat Adam Robertson who needed 17.41 points
 
 ##Here are some example URLS:
 * [Heats in a round](http://www.beachbyte.com/live09/rcp09/mr1.asp) (_supported_)
