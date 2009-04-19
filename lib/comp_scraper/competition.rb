@@ -6,10 +6,7 @@ module CompScraper
     property :base_url, String,   :nullable => false
     property :name,     String,   :nullable => false
     
-    def fetch_heat_data_for_round(round_number)
-      document = CompScraper::Document.fetch("#{base_url}mr#{round_number}.asp")
-      CompScraper::RoundHeats.fetch_data(document)
-    end
+    has n, :rounds
     
     def fetch_wave_scores_for_heat(round_number, heat_number)
       heat_number = "0#{heat_number}" if heat_number < 10

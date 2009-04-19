@@ -27,8 +27,9 @@ describe CompScraper do
     end
     
     it "should get a round's heats data" do
-      data = @comp.fetch_heat_data_for_round(1)
-      data.should be_instance_of(Array)
+      round = @comp.rounds.build(:number => 1)
+      round.fetch_heat_data
+      round.heat_data.should be_instance_of(Array)
     end
     
     it "should get a heat's wave scores" do
