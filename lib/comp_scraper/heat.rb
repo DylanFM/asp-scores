@@ -57,7 +57,7 @@ module CompScraper
         judges.each do |judge|
           j = self.judges.build(:initials => judge)
           j.save
-        end
+        end unless judges.nil?
       end
 
   end
