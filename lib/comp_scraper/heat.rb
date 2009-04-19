@@ -12,6 +12,19 @@ module CompScraper
     def save_wave_scores
       data = fetch_wave_scores
       save_competitor_diffs(data)
+      competitors = self.competitors.all
+      data[:wave_scores][:scores].each do |scores|
+        surname = scores[:name].split('.').last
+        competitor = competitors.detect { |c| c.name =~ /#{surname}$/i }
+        next unless competitor
+        scores[:waves].each do |wave|
+          competitor.waves.build(
+            :average => wave[:avg],
+            :inteference => wave[:inteference]
+          )
+        end
+        competitor.save
+      end
     end
     
     private
@@ -31,6 +44,6 @@ module CompScraper
           c.save
         end
       end
-    
+
   end
 end

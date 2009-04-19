@@ -13,5 +13,8 @@ module CompScraper
     
     belongs_to :heat
     
+    has n, :waves, :class_name => 'Wave'
+    has n, :scores, :through => :waves
+    
   end
 end
