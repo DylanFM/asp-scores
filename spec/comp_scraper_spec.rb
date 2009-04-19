@@ -8,11 +8,22 @@ describe CompScraper do
       FakeWeb.register_uri("#{@url}mr1.asp", :file => File.join(SPEC_DIR, 'supports', 'round-heat.html'))
       FakeWeb.register_uri("#{@url}mr1sc04.asp?rLingua=", :file => File.join(SPEC_DIR, 'supports', 'heat-scores.html'))
       
-      @comp = CompScraper::Competition.new(@url)
+      @name = 'Rip Curl Pro'
+      
+      @comp = CompScraper::Competition.new
+      @comp.attributes = {
+        :base_url => @url,
+        :name => @name
+      }
+      @comp.save!
     end
     
     it "should have a base url" do
       @comp.base_url.should == @url
+    end
+    
+    it "should have a name" do
+      @comp.name.should == @name
     end
     
     it "should get a round's heats data" do

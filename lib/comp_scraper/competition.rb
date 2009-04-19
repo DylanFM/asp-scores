@@ -4,10 +4,7 @@ module CompScraper
     
     property :id,       Integer,  :serial => true
     property :base_url, String,   :nullable => false
-
-    def initialize(base_url)
-      self.base_url = base_url
-    end
+    property :name,     String,   :nullable => false
     
     def fetch_heat_data_for_round(round_number)
       document = CompScraper::Document.fetch("#{base_url}mr#{round_number}.asp")
