@@ -8,11 +8,13 @@ module CompScraper
     belongs_to :round
     
     has n, :competitors
+    has n, :judges
     
     def save_wave_scores
       data = fetch_wave_scores
       save_competitor_diffs(data)
       competitors = self.competitors.all
+      create_judges(data[:wave_scores][:judges])
       data[:wave_scores][:scores].each do |scores|
         surname = scores[:name].split('.').last
         competitor = competitors.detect { |c| c.name =~ /#{surname}$/i }
@@ -22,8 +24,9 @@ module CompScraper
             :average => wave[:avg],
             :inteference => wave[:inteference]
           )
-          wave[:scores].each do |score|
-            w.scores.build(:amount => score)
+          wave[:scores].each_with_index do |score, k|
+            judge = self.judges.first(:initials => data[:wave_scores][:judges][k])
+            w.scores.build(:amount => score, :judge => judge)
           end
           w
         end
@@ -46,6 +49,13 @@ module CompScraper
             :diff_amount => competitor[:diff][:amount]
           }
           c.save
+        end
+      end
+      
+      def create_judges(judges)
+        judges.each do |judge|
+          j = self.judges.build(:initials => judge)
+          j.save
         end
       end
 

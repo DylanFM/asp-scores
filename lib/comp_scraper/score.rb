@@ -6,6 +6,7 @@ module CompScraper
     property :amount, Float,    :nullable => false
     
     belongs_to :wave
+    belongs_to :judge
     
   end
 end
