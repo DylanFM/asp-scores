@@ -14,6 +14,10 @@ module CompScraper
       self.name || "r#{self.number}"
     end
     
+    def to_s
+      self.name ? CompScraper::ROUNDS[:"#{self.name}"] : "Round #{self.number}"
+    end
+    
     def save_heat_data
       self.heats = fetch_heat_data.collect do |heat|
         h = Heat.create(:number => heat[:heat_number])

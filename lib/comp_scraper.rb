@@ -21,4 +21,10 @@ Tidy.path = TIDY_PATH
 
 module CompScraper
   
+  ROUNDS = {
+    :"qf" => 'Quarter-final',
+    :"sf" => 'Semi-final',
+    :"fi" => 'Final'
+  }
+  
 end
