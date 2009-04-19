@@ -33,10 +33,5 @@ describe CompScraper do
       @comp.save
     end
     
-    it "should get a heat's wave scores" do
-      data = @comp.fetch_wave_scores_for_heat(1,4)
-      data.should be_instance_of(Hash)
-    end
-    
   end
 end

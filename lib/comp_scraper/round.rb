@@ -25,6 +25,7 @@ module CompScraper
         h
       end
       self.save
+      self.heats.collect { |heat| heat.save_wave_scores }
     end
     
     private

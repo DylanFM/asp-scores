@@ -8,6 +8,8 @@ module CompScraper
     property :points,         Float,    :nullable => false
     property :home_country,   String
     property :singlet_colour, String
+    property :diff_status,    String
+    property :diff_amount,    Float
     
     belongs_to :heat
     
