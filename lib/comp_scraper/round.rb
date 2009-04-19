@@ -20,7 +20,17 @@ module CompScraper
     def save_heat_data
       fetch_heat_data if heat_data.nil?
       self.heats = heat_data.collect do |heat|
-        Heat.create(:number => heat[:heat_number])
+        h = Heat.create(:number => heat[:heat_number])
+        h.competitors = heat[:competitors].collect do |competitor|
+          Competitor.create(
+            :place => competitor[:place],
+            :points => competitor[:points],
+            :singlet_colour => competitor[:singlet_colour],
+            :name => competitor[:name],
+            :home_country => competitor[:home_country]
+          )
+        end
+        h
       end
       self.save
     end

@@ -7,5 +7,7 @@ module CompScraper
     
     belongs_to :round
     
+    has n, :competitors
+    
   end
 end
