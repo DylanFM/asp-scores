@@ -14,10 +14,11 @@ module CompScraper
       self.heats = fetch_heat_data.collect do |heat|
         h = Heat.create(:number => heat[:heat_number])
         h.competitors = heat[:competitors].collect do |competitor|
-          surfer = Surfer.create(
-            :name => competitor[:name],
+          person = {
+            :name => competitor[:name], 
             :home_country => competitor[:home_country]
-          )
+          }
+          surfer = Surfer.first(person) || Surfer.create(person)
           surfer.competitors.build(
             :place => competitor[:place],
             :points => competitor[:points],

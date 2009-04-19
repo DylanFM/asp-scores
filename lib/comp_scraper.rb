@@ -5,6 +5,7 @@ require 'nokogiri'
 require 'tidy'
 require 'data_mapper'
 require 'do_postgres'
+require 'dm-validations'
 
 # Load config
 require File.join(File.dirname(__FILE__), "..", "config", "environment.rb")
