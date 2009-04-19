@@ -15,7 +15,7 @@ describe CompScraper do
         :base_url => @url,
         :name => @name
       }
-      @comp.save!
+      @comp.save
     end
     
     it "should have a base url" do
@@ -30,6 +30,7 @@ describe CompScraper do
       round = @comp.rounds.build(:number => 1)
       round.fetch_heat_data
       round.heat_data.should be_instance_of(Array)
+      @comp.save
     end
     
     it "should get a heat's wave scores" do
