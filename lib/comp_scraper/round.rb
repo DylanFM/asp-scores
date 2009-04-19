@@ -5,6 +5,7 @@ module CompScraper
     property :id,     Integer,  :serial => true
     property :name,   String
     property :number, Integer
+    property :gender, String,   :nullable => false
     
     belongs_to :competition
     
@@ -41,7 +42,7 @@ module CompScraper
     
     private
       def fetch_heat_data
-        document = CompScraper::Document.fetch("#{competition.base_url}m#{identifier}.asp")
+        document = CompScraper::Document.fetch("#{competition.base_url}#{self.gender}#{identifier}.asp")
         CompScraper::RoundHeats.fetch_data(document)
       end
     

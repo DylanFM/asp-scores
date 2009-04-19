@@ -11,7 +11,7 @@ module CompScraper
       # Return the info of top two waves and heat summary in a hash
       def get_top_two_waves(page)
         get_top_two_waves_data(page).collect do |competitor|
-          next unless competitor.join('|') =~ /^((\d)\w{2})\|([\w\s]+)(\((\w+)\s*\))\|([\d\w]+\.[\w\d]{2})p,\s?(Win by|Needs|Comb.)\s([\d\w]+\.[\w\d]{2})/i
+          next unless competitor.join('|') =~ /^((\d)\w{2})\|([\w\s-]+)(\((\w+)\s*\))\|([\d\w]+\.[\w\d]{2})p,\s?(Win by|Needs|Comb.)\s([\d\w]+\.[\w\d]{2})/i
           match = Regexp.last_match
           {
             :place => match[2].to_i,

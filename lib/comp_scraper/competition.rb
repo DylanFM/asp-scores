@@ -8,6 +8,22 @@ module CompScraper
     
     has n, :rounds
     has n, :heats, :through => :rounds
+    
+    def save_comp_data
+      # Men's and women's
+      %w( m f ).each do |gender|
+        # All stages of the competition
+        [1,2,3,'qf','sf','fi'].collect do |n|
+          type = n.is_a?(String) ? {:name => n} : {:number => n}
+          # Make a new round
+          round = self.rounds.build(type.merge(:gender => gender))
+          # Get the data for the round
+          round.save_heat_data
+          # Save comp
+          self.save
+        end
+      end
+    end
 
   end
 end

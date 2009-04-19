@@ -6,9 +6,13 @@ describe CompScraper do
     before do
       @url = 'http://www.beachbyte.com/live09/rcp09/'
       FakeWeb.register_uri("#{@url}mr1.asp", :file => File.join(SPEC_DIR, 'supports', 'round-heat.html'))
+      FakeWeb.register_uri("#{@url}fr1.asp", :file => File.join(SPEC_DIR, 'supports', 'female-round-1.html'))
       FakeWeb.register_uri("#{@url}mfi.asp", :file => File.join(SPEC_DIR, 'supports', 'final.html'))
       (1..9).each do |i|
         FakeWeb.register_uri("#{@url}mr1sc0#{i}.asp?rLingua=", :file => File.join(SPEC_DIR, 'supports', "heat-#{i}.html"))
+      end
+      (1..6).each do |i|
+        FakeWeb.register_uri("#{@url}fr1sc0#{i}.asp?rLingua=", :file => File.join(SPEC_DIR, 'supports', "f-heat-#{i}.html"))
       end
       
       @name = 'Rip Curl Pro'
@@ -29,15 +33,22 @@ describe CompScraper do
       @comp.name.should be @name
     end
     
-    it "should get a round's heats data" do
-      round = @comp.rounds.build(:number => 1)
+    it "should get women's first round's heats data" do
+      round = @comp.rounds.build(:number => 1, :gender => 'f')
+      round.save_heat_data
+      round.heats.size.should be 6
+      @comp.save
+    end
+    
+    it "should get men's first round's heats data" do
+      round = @comp.rounds.build(:number => 1, :gender => 'm')
       round.save_heat_data
       round.heats.size.should be 9
       @comp.save
     end
     
-    it "should get a final's heat data" do
-      final = @comp.rounds.build(:name => 'fi')
+    it "should get a men's final's data" do
+      final = @comp.rounds.build(:name => 'fi', :gender => 'm')
       final.save_heat_data
       final.heats.size.should be 1
       @comp.save
