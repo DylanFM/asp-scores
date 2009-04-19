@@ -38,7 +38,7 @@ module CompScraper
     private
       def fetch_wave_scores
         heat_number = "0#{self.number}" if self.number < 10
-        document = CompScraper::Document.fetch_and_tidy("#{self.round.competition.base_url}mr#{self.round.number}sc#{heat_number}.asp?rLingua=")
+        document = CompScraper::Document.fetch_and_tidy("#{self.round.competition.base_url}m#{self.round.identifier}sc#{heat_number}.asp?rLingua=")
         CompScraper::HeatWaveScores.fetch_data(document)
       end
     

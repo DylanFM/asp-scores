@@ -10,6 +10,10 @@ module CompScraper
     
     has n, :heats
     
+    def identifier
+      self.name || "r#{self.number}"
+    end
+    
     def save_heat_data
       self.heats = fetch_heat_data.collect do |heat|
         h = Heat.create(:number => heat[:heat_number])
@@ -33,7 +37,7 @@ module CompScraper
     
     private
       def fetch_heat_data
-        document = CompScraper::Document.fetch("#{competition.base_url}mr#{number}.asp")
+        document = CompScraper::Document.fetch("#{competition.base_url}m#{identifier}.asp")
         CompScraper::RoundHeats.fetch_data(document)
       end
     
