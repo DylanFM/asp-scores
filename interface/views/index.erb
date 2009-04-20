@@ -1,1 +1,28 @@
 <h2><%= @rcp.name %></h2>
+<% if @rcp.rounds.all.empty? %>
+	<p>There are no rounds for this competition yet.</p>
+<% else %>
+	<ol>
+	<% @rcp.rounds.all.each do |round| %>
+		<li>
+			<h4><%= (round.gender == 'f' ? "Women's" : "Men's") %> <%= round %>:</h4>
+			<% if round.heats.all.empty? %>
+				<p>There are no heats for this round yet.</p>
+			<% else %>
+				<ol>
+				<% round.heats.all.each do |heat| %>
+					<li>
+						<strong>Heat <%= heat.number %>:</strong>
+						<ol>
+						<% heat.competitors.all(:order => [:place.desc]).each do |competitor| %>
+							<li><%= competitor.surfer.name %></li>
+						<% end %>
+						</ol>
+					</li>
+			  <% end %>
+				</ol>
+			<% end %>
+		</li>
+	<% end %>
+	</ol>
+<% end %>
