@@ -5,6 +5,6 @@ require 'erb'
 require 'comp_scraper'
 
 get '/' do
-  rcp = CompScraper::Competition.first(:name => 'Rip Curl Pro Bells Beach 2009')
-  rcp.name
+  @rcp = CompScraper::Competition.first(:name => 'Rip Curl Pro Bells Beach 2009')
+  erb :index
 end
