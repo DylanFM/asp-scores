@@ -45,8 +45,11 @@ module CompScraper
     end
     
     private
+      def document
+        CompScraper::Document.fetch(source)
+      end
+    
       def fetch_heat_data
-        document = CompScraper::Document.fetch(source)
         CompScraper::RoundHeats.fetch_data(document)
       end
     
