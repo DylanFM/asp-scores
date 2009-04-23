@@ -4,6 +4,10 @@ I'm interested in doing something with all the competition data from the ASP (As
 ##Example
 This is pulled from [the Rip Curl Pro file in examples/](http://github.com/DylanFM/asp-scores/blob/3b3e31edaca6809b075f3f65bd2e912f07f3f3a3/example/rip_curl_pro.rb).
 
+There's a screenshot of what the interface is looking like (at this stage) in the examples directory.
+
+Just run the code in the example file linked above, after setting up your database and running rake auto_migrate, to get all the data from the Rip Curl Pro at Bells Beach 2009.
+
 		# Make a new competition
 		rcp = CompScraper::Competition.create(
 		    :base_url => 'http://www.beachbyte.com/live09/rcp09/',
