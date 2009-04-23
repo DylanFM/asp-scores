@@ -22,7 +22,7 @@
 					<tbody>
 					<% round.heats.all.each do |heat| %>
 						<% heat.competitors.all(:order => [:place.asc]).each do |competitor| %>
-							<tr>
+							<tr class="<%= competitor.singlet_colour.downcase %><%= competitor.last? ? ' last' : nil %>">
 							<% if competitor.place == 1 %>
 								<td rowspan=<%= heat.competitors.all.size %> class="heat-number"><%= heat.number %></td>
 							<% end %>

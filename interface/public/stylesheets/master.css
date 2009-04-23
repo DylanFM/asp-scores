@@ -31,13 +31,19 @@ body {color:#111}
   .container {width:960px;margin:1.5em auto}
   
 /*Tables*/
-  table {width:100%;margin:-1px 0 17px 0;border:1px solid #a1a1a1;border-right:none}
-    thead tr {border-bottom:1px solid #ccc}
-      thead th {background-color:#eee;border-right:1px solid #ccc}
+  table {width:100%;margin:-1px 0 17px 0;border:1px solid #ddd;border-right:none}
+    thead tr {border-bottom:1px solid #aaa}
+      thead th {border-right:1px solid #ddd}
     tbody tr {border-bottom:1px solid #ddd}
       td, th {padding:0 10px;height:35px;text-align:center;vertical-align:middle}
       tbody td {border-right:1px solid #ddd}
+      td.heat-number {font-weight:bold;font-size:1.2em;line-height:2.5em;margin-bottom:1.25em;background-color:#fff;border-bottom:1px solid #aaa}
       td.copy, th.copy {text-align:left}
-      
-/*Heats table*/
-  td.heat-number {font-weight:bold;font-size:1.2em;line-height:2.5em;margin-bottom:1.25em;background-color:#eeefff}
+      tr.last {border-bottom:1px solid #aaa}
+  /*Colours*/
+  .pink {background-color:#FFE0F4}
+  tr.pink {background: -webkit-gradient(linear, left top, left bottom, from(#FFE0F4), color-stop(0.6, #fff))}
+  .blue {background-color:#E9FFFA}
+  tr.blue {background: -webkit-gradient(linear, left top, left bottom, from(#E9FFFA), color-stop(0.6, #fff))}
+  .yellow {background-color:#FFFEE3}
+  tr.yellow {background: -webkit-gradient(linear, left top, left bottom, from(#FFFEE3), color-stop(0.6, #fff))}
