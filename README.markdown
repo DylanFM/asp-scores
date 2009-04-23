@@ -6,16 +6,16 @@ This is pulled from [the Rip Curl Pro file in examples/](http://github.com/Dylan
 
 Here's [a screenshot of the interface](http://github.com/DylanFM/asp-scores/blob/d621d268318dca314c72bb1b943b08c3a67ca9a2/example/interface-screenshot.png) (at this stage) with the Rip Curl Pro data.
 
-Just run the code in the example file linked above, after setting up your database and running rake auto_migrate, to get all the data from the Rip Curl Pro at Bells Beach 2009.
+After setting up your database and running rake auto_migrate, run the first 5 lines of code below to get all the data from the Rip Curl Pro at Bells Beach 2009.
 
 		# Make a new competition
 		rcp = CompScraper::Competition.create(
 		    :base_url => 'http://www.beachbyte.com/live09/rcp09/',
 		    :name => "Rip Curl Pro Bells Beach 2009"
 		  )
-
 		rcp.save_comp_data
 
+		# It's only code for output from here on...
 		puts rcp.name
 		rcp.rounds.all.each do |round|
 		  puts "#{round.gender == 'f' ? "Women's" : "Men's"} #{round}:"
@@ -122,3 +122,4 @@ I'd like to get each of these pages supported and to plonk everything into a dat
 * Nokogiri
 * Tidy (change the path in lib/comp_scraper.rb to your tidy installation)
 * Datamapper
+* Sinatra (only for interface)
