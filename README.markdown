@@ -14,7 +14,7 @@ Just run the code in the example file linked above, after setting up your databa
 		    :name => "Rip Curl Pro Bells Beach 2009"
 		  )
 
-		rcp.save_comp_data # !> `&' interpreted as argument prefix
+		rcp.save_comp_data
 
 		puts rcp.name
 		rcp.rounds.all.each do |round|
