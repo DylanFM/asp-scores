@@ -11,19 +11,20 @@ module CompScraper
       # Return the info of top two waves and heat summary in a hash
       def get_top_two_waves(page)
         get_top_two_waves_data(page).collect do |competitor|
-          next unless competitor.join('|') =~ /^((\d)\w{2})\|([\w\s-]+)(\((\w+)\s*\))\|([\d\w]+\.[\w\d]{2})p,\s?(Win by|Needs|Comb.)\s([\d\w]+\.[\w\d]{2})/i
-          match = Regexp.last_match
-          {
-            :place => match[2].to_i,
-            :name => match[3].strip,
-            :from => match[5],
-            :heat_total => match[6].to_f,
-            :diff => {
-              :status => match[7],
-              :amount => match[8].to_f
+          if competitor.join('|') =~ /^((\d)\w{2})\|([\w\s-]+)(\((\w+)\s*\))\|([\d\w]+\.[\w\d]{2})p,\s?(Win by|Needs|Comb.)\s([\d\w]+\.[\w\d]{2})/i
+            match = Regexp.last_match
+            {
+              :place => match[2].to_i,
+              :name => match[3].strip,
+              :from => match[5],
+              :heat_total => match[6].to_f,
+              :diff => {
+                :status => match[7],
+                :amount => match[8].to_f
+              }
             }
-          }
-        end
+          end
+        end.compact
       end
 
       # Return raw stripped data from the competitor's wave scores section of the page

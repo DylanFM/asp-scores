@@ -32,6 +32,13 @@ This is pulled from [the Rip Curl Pro file in examples/](http://github.com/Dylan
 		# >> 	Heat 7 - Jihad Khodr beat Patrick Gudauskas who needed 6.5 points
 		# >> 	Heat 8 - Owen Wright beat Dane Reynolds who needed 6.68 points
 		# >> 	Heat 9 - Jordy Smith beat Matt Wilkinson who needed 18.71 points
+		# >> 	Heat 10 - Adam Robertson beat Chris Davidson who needed 3.9 points
+		# >> 	Heat 11 - Mick Campbell beat Josh Kerr who needed 8.66 points
+		# >> 	Heat 12 - Dean Morrison beat Nic Muscroft who needed 6.93 points
+		# >> 	Heat 13 - Kekoa Bacalso beat Ben Dunn who needed 6.13 points
+		# >> 	Heat 14 - Drew Courtney beat Greg Emslie who needed 8.11 points
+		# >> 	Heat 15 - Tim Boal beat Michael Picon who needed 8.57 points
+		# >> 	Heat 16 - Tiago Pires beat Dustin Barca who needed 7.5 points
 		# >> Men's Round 2:
 		# >> 	Heat 1 - CJ Hobgood beat Mick Campbell who needed 9.67 points
 		# >> 	Heat 2 - Taylor Knox beat Chris Ward who needed 16.94 points
@@ -42,6 +49,13 @@ This is pulled from [the Rip Curl Pro file in examples/](http://github.com/Dylan
 		# >> 	Heat 7 - Jordy Smith beat Damien Hobgood who needed 5.84 points
 		# >> 	Heat 8 - Owen Wright beat Kelly Slater who needed 7.67 points
 		# >> 	Heat 9 - Adam Robertson beat Bede Durbidge who needed 7.94 points
+		# >> 	Heat 10 - Tom Whitaker beat Jihad Khodr who needed 7.57 points
+		# >> 	Heat 11 - Drew Courtney beat Adriano de Souza who needed 8.15 points
+		# >> 	Heat 12 - Kekoa Bacalso beat Jeremy Flores who needed 8.11 points
+		# >> 	Heat 13 - Jay Thompson beat Taj Burrow who needed 8.0 points
+		# >> 	Heat 14 - Kieren Perrow beat Tim Reyes who needed 16.57 points
+		# >> 	Heat 15 - Dean Morrison beat Adrian Buchan who needed 13.5 points
+		# >> 	Heat 16 - Fredrick Patacchia beat David Weare who needed 6.18 points
 		# >> Men's Round 3:
 		# >> 	Heat 1 - CJ Hobgood beat Taylor Knox who needed 8.5 points
 		# >> 	Heat 2 - Joel Parkinson beat Kai Otton who needed  points
@@ -90,8 +104,6 @@ This is pulled from [the Rip Curl Pro file in examples/](http://github.com/Dylan
 		# >> 	Heat 2 - Silvana Lima beat Sofia Mulanovich who needed 15.0 points
 		# >> Women's Final:
 		# >> 	Heat 1 - Silvana Lima beat Stephanie Gilmore who needed 9.51 points
-		
-_As you may notice above, there are some issues with the women's heats. I'm not sure if that's (just) the code or if it's also that some heat pages are missing. Also, some heats have more that 2 people but only 2 are being showed above._
 
 ##Here are some example URLS:
 * [Heats in a round](http://www.beachbyte.com/live09/rcp09/mr1.asp) (_supported_)

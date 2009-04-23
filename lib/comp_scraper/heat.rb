@@ -40,12 +40,12 @@ module CompScraper
     end
     
     def heat_number
-      "0#{self.number}" if self.number < 10
+      self.number < 10 ? "0#{self.number}" : self.number.to_s
     end
     
     private
       def document
-        CompScraper::Document.fetch_and_tidy(source(heat_number))
+        CompScraper::Document.fetch_and_tidy source(heat_number)
       end
     
       def fetch_wave_scores

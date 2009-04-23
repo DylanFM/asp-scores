@@ -8,11 +8,14 @@ describe CompScraper do
       FakeWeb.register_uri("#{@url}mr1.asp", :file => File.join(SPEC_DIR, 'supports', 'round-heat.html'))
       FakeWeb.register_uri("#{@url}fr1.asp", :file => File.join(SPEC_DIR, 'supports', 'female-round-1.html'))
       FakeWeb.register_uri("#{@url}mfi.asp", :file => File.join(SPEC_DIR, 'supports', 'final.html'))
-      (1..9).each do |i|
-        FakeWeb.register_uri("#{@url}mr1sc0#{i}.asp?rLingua=", :file => File.join(SPEC_DIR, 'supports', "heat-#{i}.html"))
+      FakeWeb.register_uri("#{@url}mfisc01.asp?rLingua=", :file => File.join(SPEC_DIR, 'supports', 'final-heat.html'))
+      (1..16).each do |i|
+        padded_i = "0#{i}" if i < 10
+        FakeWeb.register_uri("#{@url}mr1sc#{padded_i}.asp?rLingua=", :file => File.join(SPEC_DIR, 'supports', "heat-#{i}.html"))
       end
       (1..6).each do |i|
-        FakeWeb.register_uri("#{@url}fr1sc0#{i}.asp?rLingua=", :file => File.join(SPEC_DIR, 'supports', "f-heat-#{i}.html"))
+        padded_i = "0#{i}" if i < 10
+        FakeWeb.register_uri("#{@url}fr1sc#{padded_i}.asp?rLingua=", :file => File.join(SPEC_DIR, 'supports', "f-heat-#{i}.html"))
       end
       
       @name = 'Rip Curl Pro'
@@ -43,7 +46,7 @@ describe CompScraper do
     it "should get men's first round's heats data" do
       round = @comp.rounds.build(:number => 1, :gender => 'm')
       round.save_heat_data
-      round.heats.size.should be 9
+      round.heats.size.should be 16
       @comp.save
     end
     

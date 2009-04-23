@@ -29,7 +29,7 @@ module CompScraper
       # Get the raw heat data and make it more usable
       def process_heat_info(data)
         data.inject(Array.new) do |heats, heat|
-          next heats unless heat[0] =~ /(Heat # (\d+)).*(Round (\d+)|Quarter-final|Semifinal|Final)?/m
+          next heats unless heat[0] =~ /(Heat #\s?(\d+)).*(Round (\d+)|Quarter-final|Semifinal|Final)?/m
           match = Regexp.last_match
           heats << {
             :heat_number => match[2],
