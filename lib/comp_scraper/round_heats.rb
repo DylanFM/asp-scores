@@ -15,8 +15,9 @@ module CompScraper
         competitor_info, competitors = heat[6..-1], []
         until competitor_info.empty? || competitor_info.size < 5
           competitor = competitor_info.slice!(0..4)
+          p competitor[0]
           competitors << {
-                :singlet_colour => competitor[0].gsub(/[\\nr]/,''),
+                :singlet_colour => competitor[0],
                 :place => competitor[1].to_i,
                 :points => competitor[2].to_f,
                 :name => competitor[3],
