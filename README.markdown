@@ -4,7 +4,7 @@ I'm interested in doing something with all the competition data from the ASP (As
 ##Example
 This is pulled from [the Rip Curl Pro file in examples/](http://github.com/DylanFM/asp-scores/blob/3b3e31edaca6809b075f3f65bd2e912f07f3f3a3/example/rip_curl_pro.rb).
 
-There's a screenshot of what the interface is looking like (at this stage) in the examples directory.
+Here's [a screenshot of the interface](http://github.com/DylanFM/asp-scores/blob/d621d268318dca314c72bb1b943b08c3a67ca9a2/example/interface-screenshot.png) (at this stage) with the Rip Curl Pro data.
 
 Just run the code in the example file linked above, after setting up your database and running rake auto_migrate, to get all the data from the Rip Curl Pro at Bells Beach 2009.
 
