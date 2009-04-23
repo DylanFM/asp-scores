@@ -40,9 +40,13 @@ module CompScraper
       self.heats.collect { |heat| heat.save_wave_scores }
     end
     
+    def source
+      "#{competition.base_url}#{self.gender}#{identifier}.asp"
+    end
+    
     private
       def fetch_heat_data
-        document = CompScraper::Document.fetch("#{competition.base_url}#{self.gender}#{identifier}.asp")
+        document = CompScraper::Document.fetch(source)
         CompScraper::RoundHeats.fetch_data(document)
       end
     
