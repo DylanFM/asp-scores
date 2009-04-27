@@ -26,6 +26,9 @@ describe CompScraper do
         :name => @name
       }
       @comp.save
+      @final = @comp.rounds.build(:name => 'fi', :gender => 'm')
+      @final.save_heat_data
+      @comp.save
     end
     
     it "should have a base url" do
@@ -51,9 +54,7 @@ describe CompScraper do
     end
     
     it "should get a men's final's data" do
-      final = @comp.rounds.build(:name => 'fi', :gender => 'm')
-      final.save_heat_data
-      final.heats.size.should be 1
+      @final.heats.size.should be 1
       @comp.save
     end
     
