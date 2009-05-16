@@ -13,11 +13,10 @@ if(!window.Leonardo) { var Leonardo = {}; }
 	//
 	init = function (target_element, width, height, data, settings) {
 		target = target_element;
-		dimensions = {width: width, height: height}
+		dimensions = {width: width, height: height};
 		particulars = data;
 		graph = null;
 		
-		insertCurrentData();
 		drawCanvas();
 		drawSpark();
 	};
@@ -27,19 +26,21 @@ if(!window.Leonardo) { var Leonardo = {}; }
 	};
 	
 	drawSpark = function () {
+    var f = "";
 		// Drop the pen
 		path = graph.path({stroke: settings.sparkColour}).moveTo(0, dimensions.height);
 		for (var i = 0; i < particulars.length; i++) {
-			path.lineTo((i * 2), dimensions.height - (percentageOfRange(particulars[i])/dimensions.height)*100);
+	    f = (i==0) ? "moveTo" : "lineTo";
+			path[f]((i * (dimensions.width/particulars.length)), dimensions.height - (percentageOfRange(particulars[i])/dimensions.height)*15);		    
 		}
 	};
 	
 	insertCurrentData = function () {
-		$("#"+target).text(particulars[particulars.length-1])
+		$("#"+target).text(particulars[particulars.length-1]);
 	};
 	
 	percentageOfRange = function (value) {
-		return ((value/particulars.sum())*100)
+		return ((value/particulars.sum())*100);
 	};
 })();
 
@@ -50,4 +51,4 @@ Array.prototype.sum = function () {
      sum += this[i];
   }
   return sum;
-}
+};

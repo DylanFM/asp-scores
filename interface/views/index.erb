@@ -17,6 +17,7 @@
               <th class="copy" scope="col">Surfer</th>
               <th scope="col">Singlet</th>
               <th class="copy" scope="col">Points</th>
+              <th class="graph">Timeline</th>
             </tr>
           </thead>
           <tbody>
@@ -29,10 +30,8 @@
                 <td><%= competitor.place %></td>
                 <td class="copy"><%= competitor.surfer.name %></td>
                 <td><%= competitor.singlet_colour.capitalize %></td>
-                <td class="copy">
-                  <%= competitor.points %> (<%= competitor.diff_status %> <%= competitor.diff_amount %>)
-                  <div id="graph-<%= competitor.id %>"></div>
-                </td>
+                <td class="copy points"><%= competitor.points %> (<%= competitor.diff_status %> <%= competitor.diff_amount %>)</td>
+                <td class="graph" id="graph-<%= competitor.id %>"></td>
               </tr>
             <% end %>
           <% end %>

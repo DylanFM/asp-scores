@@ -11,7 +11,7 @@ fieldset {text-align:left;border:none}
     fieldset.checkboxes li {clear:both;padding:.75em}
       fieldset.checkboxes label {margin:0 0 0 1em;width:20em}
       fieldset.checkboxes input {float:left}
-      
+
 /*Messages (errors)*/
 div.success{background-color:#00AF2B}
 div.error{background-color:#860000;color:#fff}
@@ -26,10 +26,10 @@ body {color:#111}
   a:link {color:#222}
   a:visited {color:#333}
   a:active,a:hover,a:focus {color:#000}
-  
+
 /*Structure*/
   .container {width:960px;margin:1.5em auto}
-  
+
 /*Tables*/
   table {width:100%;margin:-1px 0 17px 0;border:1px solid #ddd;border-right:none}
     thead tr {border-bottom:1px solid #aaa}
@@ -39,6 +39,8 @@ body {color:#111}
       tbody td {border-right:1px solid #ddd}
       td.heat-number {font-weight:bold;font-size:1.2em;line-height:2.5em;margin-bottom:1.25em;background-color:#fff;border-bottom:1px solid #aaa}
       td.copy, th.copy {text-align:left}
+      td.graph {width:100px}
+        .graph svg {margin:0 auto}
       tr.last {border-bottom:1px solid #aaa}
   /*Colours*/
   .pink {background-color:#FFE0F4}
