@@ -1,42 +1,45 @@
 <h2><%= @rcp.name %></h2>
 <% if @rcp.rounds.all.empty? %>
-	<p>There are no rounds for this competition yet.</p>
+  <p>There are no rounds for this competition yet.</p>
 <% else %>
-	<ol>
-	<% @rcp.rounds.all.each do |round| %>
-		<li>
-			<h4><%= (round.gender == 'f' ? "Women's" : "Men's") %> <%= round %></h4>
-			<% if round.heats.all.empty? %>
-				<p>There are no heats for this round yet.</p>
-			<% else %>
-				<table class="round-heats">
-					<thead>
-						<tr>
-							<th scope="col">Heat number</th>
-							<th scope="col">Place</th>
-							<th class="copy" scope="col">Surfer</th>
-							<th scope="col">Singlet</th>
-							<th class="copy" scope="col">Points</th>
-						</tr>
-					</thead>
-					<tbody>
-					<% round.heats.all.each do |heat| %>
-						<% heat.competitors.all(:order => [:place.asc]).each do |competitor| %>
-							<tr class="<%= competitor.singlet_colour.downcase %><%= competitor.last? ? ' last' : nil %>">
-							<% if competitor.place == 1 %>
-								<td rowspan=<%= heat.competitors.all.size %> class="heat-number"><%= heat.number %></td>
-							<% end %>
-								<td><%= competitor.place %></td>
-								<td class="copy"><%= competitor.surfer.name %></td>
-								<td><%= competitor.singlet_colour.capitalize %></td>
-								<td class="copy"><%= competitor.points %> (<%= competitor.diff_status %> <%= competitor.diff_amount %>)</td>
-							</tr>
-						<% end %>
-				  <% end %>
-					</tbody>
-				</table>
-			<% end %>
-		</li>
-	<% end %>
-	</ol>
+  <ol>
+  <% @rcp.rounds.all.each do |round| %>
+    <li>
+      <h4><%= (round.gender == 'f' ? "Women's" : "Men's") %> <%= round %></h4>
+      <% if round.heats.all.empty? %>
+        <p>There are no heats for this round yet.</p>
+      <% else %>
+        <table class="round-heats">
+          <thead>
+            <tr>
+              <th scope="col">Heat number</th>
+              <th scope="col">Place</th>
+              <th class="copy" scope="col">Surfer</th>
+              <th scope="col">Singlet</th>
+              <th class="copy" scope="col">Points</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% round.heats.all.each do |heat| %>
+            <% heat.competitors.all(:order => [:place.asc]).each do |competitor| %>
+              <tr class="<%= competitor.singlet_colour.downcase %><%= competitor.last? ? ' last' : nil %>" id="competitor-<%= competitor.id %>">
+              <% if competitor.place == 1 %>
+                <td rowspan=<%= heat.competitors.all.size %> class="heat-number"><%= heat.number %></td>
+              <% end %>
+                <td><%= competitor.place %></td>
+                <td class="copy"><%= competitor.surfer.name %></td>
+                <td><%= competitor.singlet_colour.capitalize %></td>
+                <td class="copy">
+                  <%= competitor.points %> (<%= competitor.diff_status %> <%= competitor.diff_amount %>)
+                  <div id="graph-<%= competitor.id %>"></div>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </li>
+  <% end %>
+  </ol>
 <% end %>
