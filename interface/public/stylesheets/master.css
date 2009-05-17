@@ -55,4 +55,4 @@ body {color:#111}
 /*Wave tooltip*/
 div.wave {position:absolute;top:auto;left:auto;margin:-135px 0 0 -325px;width:300px;height:90px;background-color:#fff;padding:9px;border:1px solid #ccc;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;border-radius:6px;-moz-border-radius-bottomright:0;-webkit-border-bottom-right-radius: 0;border-radius-bottom-right:0}
   .wave div {position:relative}
-/*  .wave table {width:;}*/
+    .wave table {display:none}

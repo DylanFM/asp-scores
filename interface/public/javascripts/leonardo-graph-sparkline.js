@@ -54,11 +54,15 @@ if(!window.Leonardo) { var Leonardo = {}; }
           $(rect[0]).toggle(function(event) {
             $('div.wave.dialog').remove();
             var self = this;
-            console.log($(rect[0]).parent().parent());
             // Do an http request for wave data for this wave $(this).data('id')
             $.get('/waves/'+$(this).data('id'),function(markup) {
               $(markup).appendTo($(rect[0]).parent().parent());
               $('div.wave.dialog').click(function() { $(this).remove(); });
+              // Turn this into a bar graph with simple graph
+              var data = get_data_for_graph();
+              console.log(data);
+              $("div.wave.dialog div").simplegraph(data.scores, data.labels,
+                  {height: 90, width: 300, drawBars: true, barColor: '#004080', drawLine: false, drawPoints: false, drawGrid: false, barWidth: 20 });
             });
           }, 
           function() {  $('div.wave.dialog').remove();  });
