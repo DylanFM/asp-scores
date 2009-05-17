@@ -1,0 +1,8 @@
+[
+<% @competitor.waves.all.each do |wave| %>
+  {
+    'id': '<%= wave.id %>',
+    'average': '<%= wave.average %>'
+  },
+<% end %>
+]

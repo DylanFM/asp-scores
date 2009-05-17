@@ -9,7 +9,12 @@ get '/' do
   erb :index
 end
 
-get '/competitors/:competitor_id' do
+get '/competitors/:competitor_id/wave_averages' do
   @competitor = CompScraper::Competitor.get(params[:competitor_id].to_i)
-  erb :'competitors.json', :layout => false
+  erb :'competitors/wave_averages.json', :layout => false
+end
+
+get '/waves/:wave_id' do
+  @wave = CompScraper::Wave.get(params[:wave_id].to_i)
+  erb :'competitors/waves/show', :layout => false
 end

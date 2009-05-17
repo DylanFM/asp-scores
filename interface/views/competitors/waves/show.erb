@@ -1,0 +1,23 @@
+<div class="wave dialog">
+
+  <div>
+
+    <!-- <span class="inteference">Inteference</span> -->
+    <table class="judge-scores">
+      <tbody>
+        <tr>
+          <td class="average"><%= @wave.average %></td>
+          <%= @wave.scores_with_judge.inject('') { |str,sc| str+"<td>#{sc[:amount]}</td>" } %>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th><abbr title="average">Avg</abbr></th>
+          <%= @wave.scores_with_judge.inject('') { |str,sc| str+"<th>#{sc[:judge_initials]}</th>" } %>
+        </tr>
+      </tfoot>
+    </table>
+
+  </div>
+
+</div>

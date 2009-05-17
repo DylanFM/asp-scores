@@ -1,0 +1,12 @@
+{
+	'average': '<%= @wave.average %>',
+	'inteference': '<%= @wave.inteference %>',
+	'scores': [
+  <% @wave.scores.all.each do |score| %>
+    {
+      'amount': '<%= score.amount %>',
+      'judge_initials': '<%= score.judge.initials %>'
+    },
+  <% end %>
+	]
+}
