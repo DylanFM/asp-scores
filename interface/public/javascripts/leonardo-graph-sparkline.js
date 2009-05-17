@@ -35,7 +35,7 @@ if(!window.Leonardo) { var Leonardo = {}; }
 	    f = (i==0) ? "moveTo" : "lineTo";
 	    var average = Number(particulars[i].average);
 	    var x = (i * (dimensions.width/particulars.length));
-	    var y = dimensions.height - (percentageOfRange(average)/dimensions.height)*15;
+	    var y = dimensions.height - (percentageOfRange(average)/dimensions.height)*10;
       if (settings.addHover) {
         var rect = graph.rect(x-8, y-8, 16, 16).attr({stroke: "none", fill: "#ff0000", opacity: 0});
         $(rect[0]).data("id",particulars[i].id);
@@ -50,18 +50,19 @@ if(!window.Leonardo) { var Leonardo = {}; }
           $(rect[0]).mouseout(function() {
             circle.remove();
           });
+          // Show a dialog on click
+          $(rect[0]).toggle(function(event) {
+            $('div.wave.dialog').remove();
+            var self = this;
+            console.log($(rect[0]).parent().parent());
+            // Do an http request for wave data for this wave $(this).data('id')
+            $.get('/waves/'+$(this).data('id'),function(markup) {
+              $(markup).appendTo($(rect[0]).parent().parent());
+              $('div.wave.dialog').click(function() { $(this).remove(); });
+            });
+          }, 
+          function() {  $('div.wave.dialog').remove();  });
         })(graph,x,y);
-        // Show a dialog on click
-        $(rect[0]).toggle(function(event) {
-          $('div.wave.dialog').remove();
-          // Do an http request for wave data for this wave $(this).data('id')
-          $.get('/waves/'+$(this).data('id'),function(markup) {
-            $(markup).appendTo('body');
-            $('div.wave.dialog').css({ 'top': event.clientY-110, 'left': event.clientX-320 });
-            $('div.wave.dialog').click(function() { $(this).remove(); });
-          });
-        }, 
-        function() {  $('div.wave.dialog').remove();  });
       }
 			path[f](x, y);
 		}

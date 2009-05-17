@@ -41,7 +41,7 @@ body {color:#111}
       tbody td {border-right:1px solid #ddd}
       td.heat-number {font-weight:bold;font-size:1.2em;line-height:2.5em;margin-bottom:1.25em;background-color:#fff;border-bottom:1px solid #aaa}
       td.copy, th.copy {text-align:left}
-      td.graph {width:100px}
+      td.graph {width:100px;position:relative}
         .graph svg {margin:0 auto}
       tr.last {border-bottom:1px solid #aaa}
   /*Colours*/
@@ -53,6 +53,6 @@ body {color:#111}
   tr.yellow {background: -webkit-gradient(linear, left top, left bottom, from(#FFFEE3), color-stop(0.6, #fff))}
 
 /*Wave tooltip*/
-div.wave {position:fixed;top:200px;left:20px;width:300px;height:90px;background-color:#fff;padding:9px;border:1px solid #ccc;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;border-radius:6px;-moz-border-radius-bottomright:0;-webkit-border-bottom-right-radius: 0;border-radius-bottom-right:0}
+div.wave {position:absolute;top:auto;left:auto;margin:-135px 0 0 -325px;width:300px;height:90px;background-color:#fff;padding:9px;border:1px solid #ccc;-moz-border-radius:6px;-webkit-border-radius:6px;border-radius:6px;border-radius:6px;-moz-border-radius-bottomright:0;-webkit-border-bottom-right-radius: 0;border-radius-bottom-right:0}
   .wave div {position:relative}
 /*  .wave table {width:;}*/
