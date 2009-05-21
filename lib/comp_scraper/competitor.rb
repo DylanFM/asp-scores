@@ -17,6 +17,13 @@ module CompScraper
     has n, :waves, :class_name => 'Wave'
     has n, :scores, :through => :waves
 
+    def ordered_waves
+      repository do
+        waves = self.waves.all
+      end
+      waves
+    end
+
     # Returns whether the competitor came last in a heat
     def last?
       self.heat.competitors.all.size == self.place

@@ -1,14 +1,21 @@
 module CompScraper
   class Competition
     include DataMapper::Resource
-    
+
     property :id,       Integer,  :serial => true
     property :base_url, String,   :nullable => false
     property :name,     String,   :nullable => false
-    
+
     has n, :rounds
     has n, :heats, :through => :rounds
-    
+
+    def competition_rounds
+      repository do
+        rounds = self.rounds.all
+      end
+      rounds
+    end
+
     def save_comp_data
       # Men's and women's
       %w( m f ).each do |gender|

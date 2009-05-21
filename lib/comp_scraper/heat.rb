@@ -12,6 +12,13 @@ module CompScraper
     has n, :competitors
     has n, :surfers, :through => :competitors
 
+    def placed_competitors
+      repository do
+        competitors = self.competitors.all
+      end
+      competitors.sort { |a,b| a.place <=> b.place }
+    end
+
     def save_wave_scores
       data = fetch_wave_scores
       save_competitor_diffs(data)

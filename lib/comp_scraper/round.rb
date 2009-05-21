@@ -12,6 +12,13 @@ module CompScraper
 
     has n, :heats
 
+    def ordered_heats
+      repository do
+        heats = self.heats.all
+      end
+      heats
+    end
+
     def identifier
       self.name || "r#{self.number}"
     end

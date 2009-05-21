@@ -3,7 +3,7 @@
   <p>There are no rounds for this competition yet.</p>
 <% else %>
   <ol>
-  <% @rcp.rounds.all.each do |round| %>
+  <% @rcp.competition_rounds.each do |round| %>
     <li>
       <h4><%= (round.gender == 'f' ? "Women's" : "Men's") %> <%= round %></h4>
       <% if round.heats.all.empty? %>
@@ -21,8 +21,8 @@
             </tr>
           </thead>
           <tbody>
-          <% round.heats.all.each do |heat| %>
-            <% heat.competitors.all(:order => [:place.asc]).each do |competitor| %>
+          <% round.ordered_heats.each do |heat| %>
+            <% heat.placed_competitors.each do |competitor| %>
               <tr class="<%= competitor.singlet_colour.downcase %><%= competitor.last? ? ' last' : nil %>" id="competitor-<%= competitor.id %>">
               <% if competitor.place == 1 %>
                 <td rowspan=<%= heat.competitors.all.size %> class="heat-number"><%= heat.number %></td>
@@ -33,7 +33,7 @@
                 <td class="copy points"><%= competitor.points %> (<%= competitor.diff_status %> <%= competitor.diff_amount %>)</td>
                 <td class="graph" id="graph-<%= competitor.id %>">
                   <ul>
-                  <% competitor.waves.all.each do |wave| %>
+                  <% competitor.ordered_waves.each do |wave| %>
                     <li id="wave-<%= wave.id %>"><%= wave.average %></li>
                   <% end %>
                   </ul>
