@@ -60,7 +60,6 @@ if(!window.Leonardo) { var Leonardo = {}; }
               $('div.wave.dialog').click(function() { $(this).remove(); });
               // Turn this into a bar graph with simple graph
               var data = get_data_for_graph();
-              console.log(data);
               $("div.wave.dialog div").simplegraph(data.scores, data.labels,
                   {height: 90, width: 300, drawBars: true, barColor: '#004080', drawLine: false, drawPoints: false, drawGrid: false, barWidth: 20 });
             });

@@ -31,7 +31,13 @@
                 <td class="copy"><%= competitor.surfer.name %></td>
                 <td><%= competitor.singlet_colour.capitalize %></td>
                 <td class="copy points"><%= competitor.points %> (<%= competitor.diff_status %> <%= competitor.diff_amount %>)</td>
-                <td class="graph" id="graph-<%= competitor.id %>"></td>
+                <td class="graph" id="graph-<%= competitor.id %>">
+                  <ul>
+                  <% competitor.waves.all.each do |wave| %>
+                    <li id="wave-<%= wave.id %>"><%= wave.average %></li>
+                  <% end %>
+                  </ul>
+                </td>
               </tr>
             <% end %>
           <% end %>
