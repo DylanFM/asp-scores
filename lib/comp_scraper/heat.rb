@@ -2,8 +2,8 @@ module CompScraper
   class Heat
     include DataMapper::Resource
 
-    property :id,     Integer,  :serial => true
-    property :number, Integer,  :nullable => false, :index => true
+    property :id,       Integer,  :serial => true
+    property :number,   Integer,  :nullable => false, :index => true
     property :round_id, Integer,  :index => true
 
     belongs_to :round
@@ -16,7 +16,7 @@ module CompScraper
       repository do
         competitors = self.competitors.all
       end
-      competitors.sort { |a,b| a.place <=> b.place }
+      competitors
     end
 
     def save_wave_scores

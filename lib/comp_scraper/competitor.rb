@@ -17,6 +17,8 @@ module CompScraper
     has n, :waves, :class_name => 'Wave'
     has n, :scores, :through => :waves
 
+    default_scope(:default).update(:order => [:place.asc])
+
     def ordered_waves
       repository do
         waves = self.waves.all
