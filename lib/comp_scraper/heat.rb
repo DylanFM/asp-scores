@@ -1,16 +1,17 @@
 module CompScraper
   class Heat
     include DataMapper::Resource
-    
+
     property :id,     Integer,  :serial => true
-    property :number, Integer,  :nullable => false
-    
+    property :number, Integer,  :nullable => false, :index => true
+    property :round_id, Integer,  :index => true
+
     belongs_to :round
-    
+
     has n, :judges
     has n, :competitors
     has n, :surfers, :through => :competitors
-    
+
     def save_wave_scores
       data = fetch_wave_scores
       save_competitor_diffs(data)
@@ -34,24 +35,24 @@ module CompScraper
         competitor.save
       end
     end
-    
+
     def source(heat_number)
       "#{self.round.competition.base_url}#{self.round.gender}#{self.round.identifier}sc#{heat_number}.asp?rLingua="
     end
-    
+
     def heat_number
       self.number < 10 ? "0#{self.number}" : self.number.to_s
     end
-    
+
     private
       def document
         CompScraper::Document.fetch_and_tidy source(heat_number)
       end
-    
+
       def fetch_wave_scores
         CompScraper::HeatWaveScores.fetch_data(document)
       end
-    
+
       def save_competitor_diffs(data)
         data[:top_two_waves].each do |competitor|
           c = self.competitors.first('surfer.name' => competitor[:name])
@@ -62,7 +63,7 @@ module CompScraper
           c.save
         end
       end
-      
+
       def create_judges(judges)
         judges.each do |judge|
           j = self.judges.build(:initials => judge)
