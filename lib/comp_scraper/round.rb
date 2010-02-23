@@ -2,7 +2,7 @@ module CompScraper
   class Round
     include DataMapper::Resource
 
-    property :id,             Integer,  :serial => true
+    property :id,             Serial
     property :name,           String
     property :number,         Integer,  :index => true
     property :gender,         String,   :nullable => false, :index => true

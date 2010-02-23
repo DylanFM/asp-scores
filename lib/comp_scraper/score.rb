@@ -2,7 +2,7 @@ module CompScraper
   class Score
     include DataMapper::Resource
 
-    property :id,       Integer,  :serial => true
+    property :id,       Serial
     property :amount,   Float,    :nullable => false
     property :wave_id,  Integer,  :index => true
     property :judge_id, Integer,  :index => true

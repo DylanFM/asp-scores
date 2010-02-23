@@ -2,7 +2,7 @@ module CompScraper
   class Competition
     include DataMapper::Resource
 
-    property :id,       Integer,  :serial => true
+    property :id,       Serial
     property :base_url, String,   :nullable => false
     property :name,     String,   :nullable => false
 

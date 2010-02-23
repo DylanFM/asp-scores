@@ -2,7 +2,7 @@ module CompScraper
   class Heat
     include DataMapper::Resource
 
-    property :id,       Integer,  :serial => true
+    property :id,       Serial
     property :number,   Integer,  :nullable => false, :index => true
     property :round_id, Integer,  :index => true
 

@@ -4,7 +4,6 @@ require 'uri'
 require 'nokogiri'
 require 'tidy'
 require 'data_mapper'
-require 'do_postgres'
 require 'dm-validations'
 
 # Load config
@@ -20,11 +19,11 @@ Dir.glob(File.join(File.dirname(__FILE__), "comp_scraper", "*.rb")).each { |f| r
 Tidy.path = TIDY_PATH
 
 module CompScraper
-  
+
   ROUNDS = {
     :"qf" => 'Quarter-final',
     :"sf" => 'Semi-final',
     :"fi" => 'Final'
   }
-  
+
 end

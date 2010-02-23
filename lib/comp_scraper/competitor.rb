@@ -2,7 +2,7 @@ module CompScraper
   class Competitor
     include DataMapper::Resource
 
-    property :id,             Integer,  :serial => true
+    property :id,             Serial
     property :place,          Integer,  :nullable => false, :index => true
     property :points,         Float,    :nullable => false
     property :singlet_colour, String
@@ -14,7 +14,7 @@ module CompScraper
     belongs_to :heat
     belongs_to :surfer
 
-    has n, :waves, :class_name => 'Wave'
+    has n, :waves, :model => 'Wave'
     has n, :scores, :through => :waves
 
     default_scope(:default).update(:order => [:place.asc])

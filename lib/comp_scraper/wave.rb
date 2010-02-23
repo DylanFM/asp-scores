@@ -2,7 +2,7 @@ module CompScraper
   class Wave
     include DataMapper::Resource
 
-    property :id,             Integer,  :serial => true
+    property :id,             Serial
     property :average,        Float
     property :inteference,    Boolean,  :default => false
     property :competitor_id,  Integer,  :index => true

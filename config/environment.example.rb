@@ -5,7 +5,7 @@ TIDY_PATH = '/usr/lib/tidylib.so'
 DATABASE_OPTIONS = {
   :host => 'localhost',
   :adapter => 'postgres',
-  :username => 'postgres',
+  :username => 'username',
   :password => 'password',
-  :database => 'comp_scraper'
+  :database => 'aspscores_dev'
 }
