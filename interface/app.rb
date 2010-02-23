@@ -4,8 +4,8 @@ require 'comp_scraper'
 require 'sinatra'
 require 'erb'
 
-get '/' do
-  @rcp = CompScraper::Competition.first(:name => 'Rip Curl Pro Bells Beach 2009')
+get '/:id' do
+  @rcp = CompScraper::Competition.get(params[:id])
   erb :index
 end
 
